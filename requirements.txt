@@ -1,0 +1,11 @@
+streamlit
+langchain
+langchain-community
+python-dotenv
+pathlib
+jupyter
+google-generativeai
+spacy
+nltk
+en_core_web_lg
+firebase-admin
