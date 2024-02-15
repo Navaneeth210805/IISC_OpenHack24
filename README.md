@@ -7,4 +7,4 @@ To run this model in your local system :
 3. Make sure to install the requirements from the requirements.txt
 4. Ensure you have the firebase authentication and database and store the json file from google firebase in your directory
 
-#Your Good To GO
+#Your Good to go
