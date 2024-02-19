@@ -6,5 +6,6 @@ To run this model in your local system :
 2. Make sure to set the environment (.env) file in your directory with GOOGLE_API_KEY = "your claimed API key"
 3. Make sure to install the requirements from the requirements.txt
 4. Ensure you have the firebase authentication and database and store the json file from google firebase in your directory
+5. Run "streamlit run main.py"
 
 # You're Good to go
