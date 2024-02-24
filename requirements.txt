@@ -11,3 +11,4 @@ firebase-admin
 streamlit_option_menu
 transformers
 streamlit-mic-recorder
+langchain_google_genai
