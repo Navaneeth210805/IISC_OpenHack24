@@ -16,7 +16,7 @@ import spacy
 from langchain_community.document_loaders import WebBaseLoader
 
 load_dotenv()
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=os.getenv("AIzaSyA3teT3iVBatc3sM-9Q3WhZ9GfB3fCUP-w"))
 model = genai.GenerativeModel('gemini-pro')
 
 previous = ""
