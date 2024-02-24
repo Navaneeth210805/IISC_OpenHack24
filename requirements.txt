@@ -8,3 +8,4 @@ google-generativeai
 spacy
 nltk
 firebase-admin
+streamlit_option_menu
