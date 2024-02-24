@@ -9,3 +9,5 @@ spacy
 nltk
 firebase-admin
 streamlit_option_menu
+transformers
+streamlit-mic-recorder
