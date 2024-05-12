@@ -36,8 +36,7 @@ docstring-inheritance==2.1.2
 duck==0.1
 duckduckgo_search==4.4
 duckduckpy==0.2
-https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.7.1/en_core_web_lg-3.7.1-py3-none-any.whl#sha256=ab70aeb6172cde82508f7739f35ebc9918a3
-d07debeed637403c8f794ba3d3dc
+https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.7.1/en_core_web_lg-3.7.1-py3-none-any.whl#sha256=ab70aeb6172cde82508f7739f35ebc9918a3d07debeed637403c8f794ba3d3dc
 executing==2.0.1
 fastjsonschema==2.19.1
 filelock==3.13.1
