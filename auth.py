@@ -1,6 +1,6 @@
 import streamlit as st
 import firebase_admin
-
+import os
 from firebase_admin import credentials
 from firebase_admin import auth
 
@@ -8,7 +8,31 @@ from firebase_admin import auth
 def app():
     try:
         # Attempt to initialize Firebase
-        cred = credentials.Certificate("swiftscan-a6de5-a00bfeb59fcb.json")
+        private_key = os.environ.get("PRIVATE_KEY")
+        type=os.environ.get("TYPE")
+        client_email = os.environ.get("CLIENT_EMAIL")
+        client_id = os.environ.get("CLIENT_ID")
+        auth_uri = os.environ.get("AUTH_URI")
+        token_uri = os.environ.get("TOKEN_URI")
+        auth_provider_x509_cert_url = os.environ.get("AUTH_PROVIDER_URI")
+        client_x509_cert_url = os.environ.get("CLIENT_URI")
+        universe_domain = os.environ.get("DOMAIN")
+        Project = os.environ.get("project_id")
+        PRIVATE_KEY_ID= os.environ.get("PRIVATE_KEY_ID")
+        service_account_info = {
+            "type": type,
+            "project_id":Project,
+            "private_key_id": PRIVATE_KEY_ID,
+            "private_key": private_key,
+            "client_email": client_email,
+            "client_id": client_id,
+            "auth_uri": auth_uri,
+            "token_uri": token_uri,
+            "auth_provider_x509_cert_url": auth_provider_x509_cert_url,
+            "client_x509_cert_url": client_x509_cert_url,
+            "universe_domain": universe_domain
+        }
+        cred = credentials.Certificate(service_account_info)
         firebase_admin.initialize_app(cred)
     except ValueError:
         # Firebase has already been initialized
