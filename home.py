@@ -16,7 +16,7 @@ import spacy
 from langchain_community.document_loaders import WebBaseLoader
 
 load_dotenv()
-genai.configure(api_key=os.getenv("AIzaSyA3teT3iVBatc3sM-9Q3WhZ9GfB3fCUP-w"))
+genai.configure(api_key=os.getenv("KEY"))
 model = genai.GenerativeModel('gemini-pro')
 
 previous = ""
@@ -37,7 +37,7 @@ def app():
     def summarize_text(search, selected_language):
         content=False
         response = model.generate_content(f"Search and provide information on {search} on as a multiple paragraphs not as points and if you are not able to output any details just return No response")
-        relevant_links = duck.set_search_query(search_query=search)
+        relevant_links= [] # duck.set_search_query(search_query=search)
         if 'No response' in response:
             llm = ChatGoogleGenerativeAI(temperature=0, model='gemini-pro')
             loader = WebBaseLoader(relevant_links[0])
@@ -58,6 +58,7 @@ def app():
                 response = model.generate_content(f"Search and provide information on as a multiple paragraphs not as points {search} using the keywords in {named_entities} bolded")
         except:
             pass
+        pqr=''
         llm = ChatGoogleGenerativeAI(temperature=0, model='gemini-pro')
         text_splitter = CharacterTextSplitter()
         texts = text_splitter.split_text(response.text)
@@ -73,17 +74,18 @@ def app():
             translated_summary = summary_translator(summarized_response)
             st.markdown(f"Summarized content in {selected_language} : ")
             st.chat_message('assistant').markdown(
-                translated_summary[0].get("translation_text"))
+                pqr=translated_summary[0].get("translation_text"))
             var=True
+
 
         else:
             st.chat_message('assistant').markdown("*Summarized response*")
             st.markdown(summarized_response)
 
-        relevant_links = duck.set_search_query(search_query=search)
+        relevant_links= [] # duck.set_search_query(search_query=search)
         search = 'Summarized content on ' + search
         if var:
-            x = history.history(search, translated_summary, relevant_links)
+            x = history.history(search, pqr, relevant_links)
         else:
             x = history.history(search, summarized_response, relevant_links)
         if 'db' not in state:
@@ -129,7 +131,7 @@ def app():
         content=False
         st.chat_message("user").markdown(search)
         response = model.generate_content(f"Search and provide information on {search} on as a multiple paragraphs not as points and if you are not able to output any details just return No response")
-        relevant_links = duck.set_search_query(search_query=search)
+        relevant_links= [] # duck.set_search_query(search_query=search)
         if 'No response' in response:
             llm = ChatGoogleGenerativeAI(temperature=0, model='gemini-pro')
             loader = WebBaseLoader(relevant_links[0])
@@ -152,6 +154,7 @@ def app():
             pass
         var=False
         translated_text=''
+        full_translation=''
         if not selected_language:
             selected_language = "English"
         elif selected_language == "English":
@@ -165,15 +168,15 @@ def app():
             st.chat_message('assistant').markdown(f"*Translation into {selected_language}*")
             for i in translated_text_array:
                 st.markdown(i[0].get('translation_text'))
-
+            full_translation=''.join(translated_text_array)
 
 
         st.write("Relevant Links : ")
-        html_for_relevant_links = ("<ul>" + "".join(f"<li><a href='{link}'>{link}</a></li>" for link in relevant_links)
-                                   + "</ul>")
-        st.write(html_for_relevant_links, unsafe_allow_html=True)
+        # html_for_relevant_links = ("<ul>" + "".join(f"<li><a href='{link}'>{link}</a></li>" for link in relevant_links)
+        #                            + "</ul>")
+        # st.write(html_for_relevant_links, unsafe_allow_html=True)
         if var:
-            x = history.history(search_query, translated_text, relevant_links)
+            x = history.history(search_query, full_translation, relevant_links)
         else:
             x = history.history(search_query, response.text, relevant_links)
         global previous
